@@ -1,3 +1,8 @@
+<div *ngIf="isSignedUp; else signupForm">
+  Your registration is successful. Please login!
+</div>
+
+<ng-template #signupForm>
 <mat-toolbar color="accent">
   <mat-toolbar-row>
     <span class="example-spacer"></span>
@@ -21,11 +26,19 @@
           [(ngModel)]="form.userFirstName"
           #userFirstName="ngModel"
           required
+          minlength="3"
+          maxlength="50"
         />
         <mat-hint>
           <div *ngIf="f.submitted && userFirstName.invalid">
             <div *ngIf="userFirstName.errors.required">
               First Name is required
+            </div>
+            <div *ngIf="userFirstName.errors.minlength">
+              First Name must be at least 3 characters
+            </div>
+            <div *ngIf="userFirstName.errors.maxlength">
+              First Name must not be more than 50 characters
             </div>
           </div>
         </mat-hint>
@@ -40,11 +53,19 @@
           [(ngModel)]="form.userLastName"
           #userLastName="ngModel"
           required
+          minlength="3"
+          maxlength="50"
         />
         <mat-hint>
           <div *ngIf="f.submitted && userLastName.invalid">
             <div *ngIf="userLastName.errors.required">
               Last Name is required
+            </div>
+            <div *ngIf="userLastName.errors.minlength">
+              Last Name must be at least 3 characters
+            </div>
+            <div *ngIf="userLastName.errors.maxlength">
+              Last Name must not be more than 50 characters
             </div>
           </div>
         </mat-hint>
@@ -59,10 +80,19 @@
           [(ngModel)]="form.username"
           #username="ngModel"
           required
+          minlength="3"
+          maxlength="50"
         />
         <mat-hint>
           <div *ngIf="f.submitted && username.invalid">
             <div *ngIf="username.errors.required">Username is required</div>
+
+            <div *ngIf="username.errors.minlength">
+              username must be at least 3 characters
+            </div>
+            <div *ngIf="username.errors.maxlength">
+              username must not be more than 50 characters
+            </div>
           </div>
         </mat-hint>
       </mat-form-field>
@@ -76,13 +106,23 @@
           [(ngModel)]="form.userEmail"
           #userEmail="ngModel"
           required
-          email
+          text
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          minlength="3"
+          maxlength="50"
         />
         <mat-hint>
           <div *ngIf="f.submitted && userEmail.invalid">
             <div *ngIf="userEmail.errors.required">Email is required</div>
-            <div *ngIf="userEmail.errors.email">
-              Email must be a valid email address
+            <div *ngIf="userEmail.errors.pattern">
+              Email must be a valid email address. Please ensure that it is all
+              lowercase
+            </div>
+            <div *ngIf="userEmail.errors.minlength">
+              Email must be at least 3 characters
+            </div>
+            <div *ngIf="userEmail.errors.maxlength">
+              Email must not be more than 50 characters
             </div>
           </div>
         </mat-hint>
@@ -97,7 +137,10 @@
           [(ngModel)]="form.password"
           #password="ngModel"
           required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
           minlength="6"
+          maxlength="100"
         />
         <mat-hint>
           <div *ngIf="f.submitted && password.invalid">
@@ -105,10 +148,18 @@
             <div *ngIf="password.errors.minlength">
               Password must be at least 6 characters
             </div>
+            <div *ngIf="password.errors.maxlength">
+              Password must not be more than 100 characters
+            </div>
+            <div *ngIf="password.errors.pattern">
+              Password must contain at least one number and one uppercase and
+              lowercase letter
+            </div>
           </div>
         </mat-hint>
       </mat-form-field>
     </mat-card-content>
+
     <mat-card-actions>
       <button mat-raised-button color="accent">REGISTER</button>
       <a
@@ -119,9 +170,11 @@
         matTooltip="If You Already Have An Account"
         >LOG IN</a
       >
+
       <div *ngIf="f.submitted && isSignUpFailed">
         Signup failed!<br />{{ errorMessage }}
       </div>
     </mat-card-actions>
   </mat-card>
 </form>
+</ng-template>

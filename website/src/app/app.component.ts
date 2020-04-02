@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from './auth/token-storage.service';
+
+import { TokenStorageService } from './auth/token-storage.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent  implements OnInit { 
+
   roles: string[];
-  authority: string;
   info: any;
   pm: boolean;
   admin: boolean;
   user: boolean;
   loggedIn: boolean;
-
+  
   constructor(private tokenStorage: TokenStorageService, private token: TokenStorageService) { }
-
+  
   ngOnInit() {
     this.pm = false;
     this.admin = false;
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit {
           this.user = true;
         }
       }
-
+  
       );
       this.loggedIn = true;
     }
@@ -55,4 +56,5 @@ export class AppComponent implements OnInit {
     this.loggedIn = false;
     this.token.signOut();
   }
-}
+  }
+  

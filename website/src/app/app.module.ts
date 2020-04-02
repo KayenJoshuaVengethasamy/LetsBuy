@@ -47,6 +47,12 @@ import { ReactiveFormsModule } from "@angular/forms";
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { CreateProductComponent } from './admin/products/create-product/create-product.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ProductDetailsComponent } from './admin/products/product-details/product-details.component';
+import { ProductListComponent } from './admin/products/product-list/product-list.component';
+import { UpdateProductComponent } from './admin/products/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +62,13 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     PmComponent,
     RegisterComponent,
     UserComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    CreateProductComponent,
+    AdminNavComponent,
+    NavBarComponent,
+    ProductDetailsComponent,
+    ProductListComponent,
+    UpdateProductComponent
   ],
   imports: [
     BrowserModule,
