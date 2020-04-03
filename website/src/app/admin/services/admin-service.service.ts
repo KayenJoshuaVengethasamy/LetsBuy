@@ -11,9 +11,9 @@ const httpOptions = {
 export class AdminServiceService {
 
 
-  private baseUrl = 'http://localhost:8080/api/auth';
+  private baseUrl = 'http://localhost:8080/letsbuy/auth';
 
-  private productRegisterUrl = 'http://localhost:8080/api/auth/products/register';
+  private productRegisterUrl = 'http://localhost:8080/letsbuy/auth/products/register';
 
   constructor(private http: HttpClient) { }
 

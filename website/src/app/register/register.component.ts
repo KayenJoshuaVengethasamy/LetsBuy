@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
+  
+  isLoggedIn = false;
 
   constructor(private authService: AuthService) { }
 
@@ -35,6 +37,7 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
+         this.isLoggedIn = true;
       },
       error => {
         console.log(error);

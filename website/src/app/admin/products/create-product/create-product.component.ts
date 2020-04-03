@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Product } from '../product';
 import { AdminServiceService } from '../../services/admin-service.service';
 
+
 export interface BrandGroups {
   letter: string;
   brands: string[];
@@ -23,7 +24,7 @@ interface Department {
 })
 export class CreateProductComponent implements OnInit {
   form: any = {};
-  registerProduct: Product;
+  registerProducts: Product = new Product();
   isRegistered = false;
   isRegisteredFailed = false;
   errorMessage = '';
@@ -44,6 +45,8 @@ export class CreateProductComponent implements OnInit {
   productTagForm14 = ``;
   productTagForm15 = ``;
   productTags: string[];
+  productQuantityForm: number
+  productPriceForm: number;
   finalTag1: any;
   finalTag2: any;
   finalTag3: any;
@@ -935,8 +938,10 @@ export class CreateProductComponent implements OnInit {
     this.displayed = false;
   }
 
+
   onSubmit() {
     this.displayed = true;
+    console.log(this.form);
     if (this.departmentA === this.departmentB) {
       this.message = 'A PRODUCT CANNOT BELONG TO MORE THAN ONE DEPARTMENT';
     } else if (this.departmentA === this.departmentC) {
@@ -946,7 +951,7 @@ export class CreateProductComponent implements OnInit {
 
       this.message = 'A PRODUCT CANNOT BELONG TO MORE THAN ONE DEPARTMENT';
     } else {
-
+      this.message = '';
       this.productTags = [
         this.productTagForm4,
         this.productTagForm5,
@@ -1070,7 +1075,42 @@ export class CreateProductComponent implements OnInit {
         }
         this.i--;
       }
+      this.registerProducts.adminProduct(
+        this.form.productBrand,
+        this.form.productName,
+        this.form.productImage,
+        this.form.productPrice,
+        this.form.productDescription,
+        this.form.productQuantity,
+        this.departmentA,
+        this.departmentB,
+        this.departmentC,
+        this.finalTag1,
+        this.finalTag2,
+        this.finalTag3,
+        this.finalTag4,
+        this.finalTag5,
+        this.finalTag6,
+        this.finalTag7,
+        this.finalTag8,
+        this.finalTag9,
+        this.finalTag10,
+        this.finalTag11,
+        this.finalTag12
+      );
+      this.s.registerProduct(this.registerProducts).subscribe(
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isRegisteredFailed = true;
+          this.isRegistered = true;
+        }
+      );
       console.log(
+        this.form.productQuantity,
         `tag 1 : ` + this.finalTag1 + `\n`,
         `tag 2 : ` + this.finalTag2 + `\n`,
         `tag 3 : ` + this.finalTag3 + `\n`,

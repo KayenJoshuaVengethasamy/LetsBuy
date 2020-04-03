@@ -1,7 +1,7 @@
 package com.letsbuy.webservice.message.request;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class ProductRegisterForm {
 
@@ -16,26 +16,22 @@ public class ProductRegisterForm {
 	@NotBlank
 	private String productImage;
 
-	@NotBlank
-
-	private String productPrice;
+	@NotNull
+	private double productPrice;
 
 	@NotBlank
 	private String productDescription;
-	
-	@NotBlank
-	private int productQuantity;
+
+	@NotNull
+	private double productQuantity;
 
 	@NotBlank
 	private String productTag1;
 
 	@NotBlank
-
 	private String productTag2;
 
 	@NotBlank
-
-	@Column(name = "productTag3")
 	private String productTag3;
 
 	private String productTag4;
@@ -62,6 +58,14 @@ public class ProductRegisterForm {
 
 	private String productTag15;
 
+	public String getProductBrand() {
+		return productBrand;
+	}
+
+	public void setProductBrand(String productBrand) {
+		this.productBrand = productBrand;
+	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -78,11 +82,11 @@ public class ProductRegisterForm {
 		this.productImage = productImage;
 	}
 
-	public String getProductPrice() {
+	public double getProductPrice() {
 		return productPrice;
 	}
 
-	public void setProductPrice(String productPrice) {
+	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
 
@@ -92,6 +96,14 @@ public class ProductRegisterForm {
 
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
+	}
+
+	public double getProductQuantity() {
+		return productQuantity;
+	}
+
+	public void setProductQuantity(double productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
 	public String getProductTag1() {
@@ -214,20 +226,6 @@ public class ProductRegisterForm {
 		this.productTag15 = productTag15;
 	}
 
-	public String getProductBrand() {
-		return productBrand;
-	}
 
-	public void setProductBrand(String productBrand) {
-		this.productBrand = productBrand;
-	}
-
-	public int getProductQuantity() {
-		return productQuantity;
-	}
-
-	public void setProductQuantity(int productQuantity) {
-		this.productQuantity = productQuantity;
-	}
 
 }

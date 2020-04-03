@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "productName"))
@@ -32,18 +33,18 @@ public class Product {
 	@Column(name = "productImage")
 	private String productImage;
 
-	@NotBlank
+	@NotNull
 
 	@Column(name = "productPrice")
-	private String productPrice;
+	private double productPrice;
 
 	@NotBlank
 	@Column(name = "productDescription")
 	private String productDescription;
 
-	@NotBlank
+	@NotNull
 	@Column(name = "productQuantity")
-	private int productQuantity;
+	private double productQuantity;
 
 	@NotBlank
 	@Column(name = "productTag1")
@@ -95,8 +96,8 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(String productBrand, String productName, String productImage, String productPrice,
-			String productDescription, int productQuantity, String productTag1, String productTag2, String productTag3,
+	public Product(String productBrand, String productName, String productImage, double productPrice,
+			String productDescription, double productQuantity, String productTag1, String productTag2, String productTag3,
 			String productTag4, String productTag5, String productTag6, String productTag7, String productTag8,
 			String productTag9, String productTag10, String productTag11, String productTag12, String productTag13,
 			String productTag14, String productTag15) {
@@ -106,6 +107,8 @@ public class Product {
 		this.productImage = productImage;
 		this.productPrice = productPrice;
 		this.productDescription = productDescription;
+
+		this.productQuantity = productQuantity;
 		this.productTag1 = productTag1;
 		this.productTag2 = productTag2;
 		this.productTag3 = productTag3;
@@ -121,7 +124,6 @@ public class Product {
 		this.productTag13 = productTag13;
 		this.productTag14 = productTag14;
 		this.productTag15 = productTag15;
-		this.productQuantity = productQuantity;
 	}
 
 	public Long getProductID() {
@@ -156,11 +158,11 @@ public class Product {
 		this.productImage = productImage;
 	}
 
-	public String getProductPrice() {
+	public double getProductPrice() {
 		return productPrice;
 	}
 
-	public void setProductPrice(String productPrice) {
+	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
 
@@ -292,11 +294,11 @@ public class Product {
 		this.productTag15 = productTag15;
 	}
 
-	public int getProductQuantity() {
+	public double getProductQuantity() {
 		return productQuantity;
 	}
 
-	public void setProductQuantity(int productQuantity) {
+	public void setProductQuantity(double productQuantity) {
 		this.productQuantity = productQuantity;
 	}
 

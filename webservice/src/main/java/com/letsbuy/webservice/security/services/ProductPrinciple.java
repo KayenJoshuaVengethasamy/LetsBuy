@@ -17,9 +17,10 @@ public class ProductPrinciple implements UserDetails {
 
 	private String productImage;
 
-	private String productPrice;
+	private double productPrice;
 
 	private String productDescription;
+	private double productQuantity;
 
 	private String productTag1;
 
@@ -53,7 +54,7 @@ public class ProductPrinciple implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	public ProductPrinciple(Long productID, String productBrand, String productName, String productImage,
-			String productPrice, String productDescription, String productTag1, String productTag2, String productTag3,
+			double productPrice, String productDescription, double productQuantity, String productTag1, String productTag2, String productTag3,
 			String productTag4, String productTag5, String productTag6, String productTag7, String productTag8,
 			String productTag9, String productTag10, String productTag11, String productTag12, String productTag13,
 			String productTag14, String productTag15) {
@@ -64,6 +65,7 @@ public class ProductPrinciple implements UserDetails {
 		this.productImage = productImage;
 		this.productPrice = productPrice;
 		this.productDescription = productDescription;
+		this.productQuantity = productQuantity;
 		this.productTag1 = productTag1;
 		this.productTag2 = productTag2;
 		this.productTag3 = productTag3;
@@ -83,7 +85,7 @@ public class ProductPrinciple implements UserDetails {
 
 	public static ProductPrinciple build(Product product) {
 		return new ProductPrinciple(product.getProductID(), product.getProductBrand(), product.getProductName(),
-				product.getProductImage(), product.getProductPrice(), product.getProductDescription(),
+				product.getProductImage(), product.getProductPrice(), product.getProductDescription(), product.getProductQuantity(),
 				product.getProductTag1(), product.getProductTag2(), product.getProductTag3(), product.getProductTag4(),
 				product.getProductTag5(), product.getProductTag6(), product.getProductTag7(), product.getProductTag8(),
 				product.getProductTag9(), product.getProductTag10(), product.getProductTag11(),
@@ -95,6 +97,10 @@ public class ProductPrinciple implements UserDetails {
 		return productID;
 	}
 
+	public String getProductBrand() {
+		return productBrand;
+	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -103,12 +109,16 @@ public class ProductPrinciple implements UserDetails {
 		return productImage;
 	}
 
-	public String getProductPrice() {
+	public double getProductPrice() {
 		return productPrice;
 	}
 
 	public String getProductDescription() {
 		return productDescription;
+	}
+
+	public double getProductQuantity() {
+		return productQuantity;
 	}
 
 	public String getProductTag1() {
@@ -171,10 +181,6 @@ public class ProductPrinciple implements UserDetails {
 		return productTag15;
 	}
 
-	public String getProductBrand() {
-		return productBrand;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -216,5 +222,5 @@ public class ProductPrinciple implements UserDetails {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 }
