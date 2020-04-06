@@ -161,12 +161,12 @@ public class AuthRestAPIs {
 		return response;
 	}
 
-	@GetMapping("/products")
-	public List<Product> getAllproduct() {
+	@GetMapping("/products/all")
+	public List<Product> getAllProducts() {
 		return productRepository.findAll();
 	}
 
-	@GetMapping("/products/{productID}")
+	@GetMapping("/products/getProductById/{productID}")
 	public ResponseEntity<Product> getProductById(@PathVariable(value = "productID") Long productID)
 			throws ResourceNotFoundException {
 		Product product = productRepository.findById(productID)
@@ -174,7 +174,7 @@ public class AuthRestAPIs {
 		return ResponseEntity.ok().body(product);
 	}
 
-	@PutMapping("/products/{id}")
+	@PutMapping("/products/updateProduct/{productID}")
 	public ResponseEntity<Product> updateProduct(@PathVariable(value = "productID") Long productID,
 			@Valid @RequestBody Product productDetails) throws ResourceNotFoundException {
 		Product product = productRepository.findById(productID)
@@ -188,7 +188,7 @@ public class AuthRestAPIs {
 		return ResponseEntity.ok(updatedProduct);
 	}
 
-	@DeleteMapping("/products/{id}")
+	@DeleteMapping("/products/deleteProducts/{id}")
 	public Map<String, Boolean> deleteProducts(@PathVariable(value = "productID") Long productID)
 			throws ResourceNotFoundException {
 		Product product = productRepository.findById(productID)
@@ -199,7 +199,7 @@ public class AuthRestAPIs {
 		return response;
 	}
 
-	@PostMapping("/products/register")
+	@PostMapping("/products/registerProduct")
 	public ResponseEntity<?> registerProduct(@Valid @RequestBody ProductRegisterForm productRegister) {
 		if (productRepository.existsByProductName(productRegister.getProductName())) {
 			return new ResponseEntity<>(new ResponseMessage("PRODUCT ALREADY EXISTS : "
