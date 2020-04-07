@@ -13,7 +13,7 @@ export class AdminServiceService {
 
   private baseUrl = 'http://localhost:8080/letsbuy/auth';
 
-  private productRegisterUrl = 'http://localhost:8080/letsbuy/auth/products/register';
+  // private productRegisterUrl = 'http://localhost:8080/letsbuy/auth/products/register';
 
   constructor(private http: HttpClient) { }
 
@@ -33,20 +33,20 @@ export class AdminServiceService {
   }
 
   registerProduct(info: Product): Observable<string> {
-    return this.http.post<string>(this.productRegisterUrl, info, httpOptions);
+    return this.http.post<string>(`${this.baseUrl}/products/registerProduct`, info, httpOptions);
   }
 
   getProductList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/products`);
+    return this.http.get(`${this.baseUrl}/products/all`);
   }
   getProduct(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/products/${id}`);
+    return this.http.get(`${this.baseUrl}/products/getProductById/${id}`);
   }
   updateProduct(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/products/${id}`, value);
   }
 
   deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/products/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/products/deleteProducts/${id}`, { responseType: 'text' });
   }
 }

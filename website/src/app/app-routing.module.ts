@@ -51,7 +51,7 @@ const routes: Routes = [
       component: CreateProductComponent
   },
   {
-      path: 'admin/product/details',
+      path: 'admin/product/details/:productID',
       component: ProductDetailsComponent
   },
   {

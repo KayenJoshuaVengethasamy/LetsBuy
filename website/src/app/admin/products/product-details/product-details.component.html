@@ -1,1 +1,75 @@
-<p>product-details works!</p>
+<!-- <h1></h1>
+<mat-card class="example-card" *ngIf="p">
+  <mat-card-header>
+    <div mat-card-avatar>R{{p.productPrice}}</div>
+    <mat-card-title>
+      {{p.productName}}
+    </mat-card-title>
+    <mat-card-subtitle>{{p.productBrand}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    {{p.productDescription}}
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            More Information
+          </mat-panel-title>
+          <mat-panel-description>
+            Department And Tags
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list role="list">
+          <mat-list-item role="listitem" *ngIf="p.productTag1">{{p.productTag1}}</mat-list-item>
+     
+          <mat-list-item role="listitem" *ngIf="p.productTag2">{{p.productTag2}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag3">{{p.productTag3}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag4">{{p.productTag4}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag5">{{p.productTag5}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag6">{{p.productTag6}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag7">{{p.productTag7}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag8">{{p.productTag8}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag9">{{p.productTag9}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag10">{{p.productTag10}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag11">{{p.productTag11}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag12">{{p.productTag12}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag13">{{p.productTag13}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag14">{{p.productTag14}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="p.productTag15">{{p.productTag15}}</mat-list-item>
+        </mat-list>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button mat-button>DELETE</button>
+    <button mat-button>UPDATE</button>
+    <button mat-button (click)="list()">LIST</button>
+  </mat-card-actions>
+</mat-card> -->
+
+<span *ngIf="p">
+
+    <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{p.productName}}
+            </mat-panel-title>
+            <mat-panel-description>
+              R{{p.productPrice}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        
+      </mat-accordion>
+
+
+
+    <!-- <h1>{{p.productName}}</h1>
+    <h2>{{p.productBrand}}</h2>
+    <h3>R{{p.productPrice}}</h3> -->
+</span>

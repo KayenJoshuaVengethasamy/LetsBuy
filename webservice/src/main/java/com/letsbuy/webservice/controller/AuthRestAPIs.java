@@ -188,7 +188,7 @@ public class AuthRestAPIs {
 		return ResponseEntity.ok(updatedProduct);
 	}
 
-	@DeleteMapping("/products/deleteProducts/{id}")
+	@DeleteMapping("/products/deleteProducts/{productID}")
 	public Map<String, Boolean> deleteProducts(@PathVariable(value = "productID") Long productID)
 			throws ResourceNotFoundException {
 		Product product = productRepository.findById(productID)

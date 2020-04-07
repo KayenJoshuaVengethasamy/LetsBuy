@@ -1,4 +1,5 @@
 export class Product {
+    productID:number;
     productBrand: string;
     productName: string;
     productImage: string;

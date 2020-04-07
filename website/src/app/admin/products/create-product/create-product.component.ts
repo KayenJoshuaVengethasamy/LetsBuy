@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from '../product';
 import { AdminServiceService } from '../../services/admin-service.service';
+import { Router } from '@angular/router';
 
 
 export interface BrandGroups {
@@ -61,7 +62,7 @@ export class CreateProductComponent implements OnInit {
   finalTag12: any;
   i: number;
   message: string;
-  displayed: boolean;
+  displayMessage: boolean;
   brandGroups: BrandGroups[] = [
     {
       letter: `A`,
@@ -931,27 +932,33 @@ export class CreateProductComponent implements OnInit {
     }
   ];
 
-  constructor(private s: AdminServiceService) { }
+  constructor(private s: AdminServiceService, private r: Router ){ }
 
   ngOnInit() {
     this.message = '';
-    this.displayed = false;
+    this.displayMessage = false;
   }
 
 
   onSubmit() {
-    this.displayed = true;
     console.log(this.form);
     if (this.departmentA === this.departmentB) {
       this.message = 'A PRODUCT CANNOT BELONG TO MORE THAN ONE DEPARTMENT';
+
+      this.displayMessage = true;
     } else if (this.departmentA === this.departmentC) {
 
       this.message = 'A PRODUCT CANNOT BELONG TO MORE THAN ONE DEPARTMENT';
+
+      this.displayMessage = true;
     } else if (this.departmentB === this.departmentC) {
 
       this.message = 'A PRODUCT CANNOT BELONG TO MORE THAN ONE DEPARTMENT';
+      this.displayMessage = true;
     } else {
       this.message = '';
+
+      this.displayMessage = false;
       this.productTags = [
         this.productTagForm4,
         this.productTagForm5,
@@ -974,7 +981,7 @@ export class CreateProductComponent implements OnInit {
         console.log(this.i);
         if (this.i === 1) {
           if (part === "") {
-            this.finalTag1 = undefined;
+            this.finalTag1 = "No Tag 4";
           } else {
 
             this.finalTag1 = part;
@@ -982,7 +989,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 2) {
           if (part === "") {
-            this.finalTag2 = undefined;
+            this.finalTag2 = "No Tag 5";
           } else {
 
             this.finalTag2 = part;
@@ -990,7 +997,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 3) {
           if (part === "") {
-            this.finalTag3 = undefined;
+            this.finalTag3 = "No Tag 6";
           } else {
 
             this.finalTag3 = part;
@@ -998,7 +1005,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 4) {
           if (part === "") {
-            this.finalTag4 = undefined;
+            this.finalTag4 = "No Tag 7";
           } else {
 
             this.finalTag4 = part;
@@ -1006,7 +1013,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 5) {
           if (part === "") {
-            this.finalTag5 = undefined;
+            this.finalTag5 = "No Tag 8";
           } else {
             this.finalTag5 = part;
 
@@ -1014,7 +1021,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 6) {
           if (part === "") {
-            this.finalTag6 = undefined;
+            this.finalTag6 = "No Tag 9";
           } else {
 
             this.finalTag6 = part;
@@ -1022,7 +1029,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 7) {
           if (part === "") {
-            this.finalTag7 = undefined;
+            this.finalTag7 = "No Tag 10";
           } else {
 
             this.finalTag7 = part;
@@ -1030,7 +1037,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 8) {
           if (part === "") {
-            this.finalTag8 = undefined;
+            this.finalTag8 = "No Tag 11";
           } else {
 
             this.finalTag8 = part;
@@ -1038,7 +1045,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 9) {
           if (part === "") {
-            this.finalTag9 = undefined;
+            this.finalTag9 = "No Tag 12";
           } else {
 
             this.finalTag9 = part;
@@ -1046,7 +1053,7 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 10) {
           if (part === "") {
-            this.finalTag10 = undefined;
+            this.finalTag10 = "No Tag 13";
           } else {
 
             this.finalTag10 = part;
@@ -1054,20 +1061,14 @@ export class CreateProductComponent implements OnInit {
         }
         if (this.i === 11) {
           if (part === "") {
-            this.finalTag11 = undefined;
+            this.finalTag11 = "No Tag 14";
           } else {
-
-            if (part === "") {
-              this.finalTag11 = undefined;
-            } else {
-
-              this.finalTag11 = part;
-            }
+            this.finalTag11 = part;
           }
         }
         if (this.i === 12) {
           if (part === "") {
-            this.finalTag12 = undefined;
+            this.finalTag12 = "No Tag 15";
           } else {
 
             this.finalTag12 = part;
@@ -1101,31 +1102,16 @@ export class CreateProductComponent implements OnInit {
       this.s.registerProduct(this.registerProducts).subscribe(
         data => {
           console.log(data);
+          this.isRegistered = true;
+          this.displayMessage = false;
+          this.r.navigate(['admin/product/list']);
         },
         error => {
           console.log(error);
           this.errorMessage = error.error.message;
           this.isRegisteredFailed = true;
-          this.isRegistered = true;
         }
       );
-      console.log(
-        this.form.productQuantity,
-        `tag 1 : ` + this.finalTag1 + `\n`,
-        `tag 2 : ` + this.finalTag2 + `\n`,
-        `tag 3 : ` + this.finalTag3 + `\n`,
-        `tag 4 : ` + this.finalTag4 + `\n`,
-        `tag 5 : ` + this.finalTag5 + `\n`,
-        `tag 6 : ` + this.finalTag6 + `\n`,
-        `tag 7 : ` + this.finalTag7 + `\n`,
-        `tag 8 : ` + this.finalTag8 + `\n`,
-        `tag 9 : ` + this.finalTag9 + `\n`,
-        `tag 10 : ` + this.finalTag10 + `\n`,
-        `tag 11 : ` + this.finalTag11 + `\n`,
-        `tag 12 : ` + this.finalTag12 + `\n`
-      );
-
-      this.displayed = false;
     }
 
   }

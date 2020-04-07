@@ -43,6 +43,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { LayoutModule } from "@angular/cdk/layout";
 import { MatButtonModule } from "@angular/material/button";
+import {MatTreeModule} from '@angular/material/tree'
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
@@ -107,7 +108,8 @@ import { UpdateProductComponent } from './admin/products/update-product/update-p
     ReactiveFormsModule,
     FormsModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTreeModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

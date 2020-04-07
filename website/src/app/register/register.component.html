@@ -3,178 +3,136 @@
 </div>
 
 <ng-template #signupForm>
-<mat-toolbar color="accent">
-  <mat-toolbar-row>
-    <span class="example-spacer"></span>
-    <span class="example-spacer">REGISTER</span>
-  </mat-toolbar-row>
-</mat-toolbar>
-<form
-  name="form"
-  (ngSubmit)="f.form.valid && onSubmit()"
-  #f="ngForm"
-  novalidate
->
-  <mat-card class="my-card">
-    <mat-card-content>
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label for="userFirstName">First Name</mat-label>
-        <input
-          matInput
-          type="text"
-          name="userFirstName"
-          [(ngModel)]="form.userFirstName"
-          #userFirstName="ngModel"
-          required
-          minlength="3"
-          maxlength="50"
-        />
-        <mat-hint>
-          <div *ngIf="f.submitted && userFirstName.invalid">
-            <div *ngIf="userFirstName.errors.required">
-              First Name is required
+  <mat-toolbar color="accent">
+    <mat-toolbar-row>
+      <span class="example-spacer">
+        <div *ngIf="f.submitted && isSignUpFailed">
+          {{ errorMessage }}
+        </div>
+      </span>
+      <span class="example-spacer">
+        <div *ngIf="!isSignUpFailed">
+          REGISTER
+        </div>
+      </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <form class="my-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <mat-card class="my-card">
+      <mat-card-content>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label for="userFirstName">First Name</mat-label>
+          <input matInput type="text" name="userFirstName" [(ngModel)]="form.userFirstName" #userFirstName="ngModel"
+            required minlength="3" maxlength="50" />
+          <mat-hint>
+            <div *ngIf="f.submitted && userFirstName.invalid">
+              <div *ngIf="userFirstName.errors.required">
+                First Name is required
+              </div>
+              <div *ngIf="userFirstName.errors.minlength">
+                First Name must be at least 3 characters
+              </div>
+              <div *ngIf="userFirstName.errors.maxlength">
+                First Name must not be more than 50 characters
+              </div>
             </div>
-            <div *ngIf="userFirstName.errors.minlength">
-              First Name must be at least 3 characters
-            </div>
-            <div *ngIf="userFirstName.errors.maxlength">
-              First Name must not be more than 50 characters
-            </div>
-          </div>
-        </mat-hint>
-      </mat-form-field>
+          </mat-hint>
+        </mat-form-field>
 
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label for="userLastName">Last Name</mat-label>
-        <input
-          matInput
-          type="text"
-          name="userLastName"
-          [(ngModel)]="form.userLastName"
-          #userLastName="ngModel"
-          required
-          minlength="3"
-          maxlength="50"
-        />
-        <mat-hint>
-          <div *ngIf="f.submitted && userLastName.invalid">
-            <div *ngIf="userLastName.errors.required">
-              Last Name is required
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label for="userLastName">Last Name</mat-label>
+          <input matInput type="text" name="userLastName" [(ngModel)]="form.userLastName" #userLastName="ngModel"
+            required minlength="3" maxlength="50" />
+          <mat-hint>
+            <div *ngIf="f.submitted && userLastName.invalid">
+              <div *ngIf="userLastName.errors.required">
+                Last Name is required
+              </div>
+              <div *ngIf="userLastName.errors.minlength">
+                Last Name must be at least 3 characters
+              </div>
+              <div *ngIf="userLastName.errors.maxlength">
+                Last Name must not be more than 50 characters
+              </div>
             </div>
-            <div *ngIf="userLastName.errors.minlength">
-              Last Name must be at least 3 characters
-            </div>
-            <div *ngIf="userLastName.errors.maxlength">
-              Last Name must not be more than 50 characters
-            </div>
-          </div>
-        </mat-hint>
-      </mat-form-field>
+          </mat-hint>
+        </mat-form-field>
 
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label for="username">Username</mat-label>
-        <input
-          matInput
-          type="text"
-          name="username"
-          [(ngModel)]="form.username"
-          #username="ngModel"
-          required
-          minlength="3"
-          maxlength="50"
-        />
-        <mat-hint>
-          <div *ngIf="f.submitted && username.invalid">
-            <div *ngIf="username.errors.required">Username is required</div>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label for="username">Username</mat-label>
+          <input matInput type="text" name="username" [(ngModel)]="form.username" #username="ngModel" required
+            minlength="3" maxlength="50" />
+          <mat-hint>
+            <div *ngIf="f.submitted && username.invalid">
+              <div *ngIf="username.errors.required">Username is required</div>
 
-            <div *ngIf="username.errors.minlength">
-              username must be at least 3 characters
+              <div *ngIf="username.errors.minlength">
+                username must be at least 3 characters
+              </div>
+              <div *ngIf="username.errors.maxlength">
+                username must not be more than 50 characters
+              </div>
             </div>
-            <div *ngIf="username.errors.maxlength">
-              username must not be more than 50 characters
-            </div>
-          </div>
-        </mat-hint>
-      </mat-form-field>
+          </mat-hint>
+        </mat-form-field>
 
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label for="userEmail">Email</mat-label>
-        <input
-          matInput
-          type="text"
-          name="userEmail"
-          [(ngModel)]="form.userEmail"
-          #userEmail="ngModel"
-          required
-          text
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          minlength="3"
-          maxlength="50"
-        />
-        <mat-hint>
-          <div *ngIf="f.submitted && userEmail.invalid">
-            <div *ngIf="userEmail.errors.required">Email is required</div>
-            <div *ngIf="userEmail.errors.pattern">
-              Email must be a valid email address. Please ensure that it is all
-              lowercase
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label for="userEmail">Email</mat-label>
+          <input matInput type="text" name="userEmail" [(ngModel)]="form.userEmail" #userEmail="ngModel" required text
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength="3" maxlength="50" />
+          <mat-hint>
+            <div *ngIf="!f.submitted">
+              Email must be a valid email address. Please ensure that it is all lowercase. Ex: example@example.com
             </div>
-            <div *ngIf="userEmail.errors.minlength">
-              Email must be at least 3 characters
+            <div *ngIf="f.submitted && userEmail.invalid">
+              <div *ngIf="userEmail.errors.required">Email is required</div>
+              <div *ngIf="userEmail.errors.pattern">
+                Email must be a valid email address. Please ensure that it is all lowercase
+              </div>
+              <div *ngIf="userEmail.errors.minlength">
+                Email must be at least 3 characters
+              </div>
+              <div *ngIf="userEmail.errors.maxlength">
+                Email must not be more than 50 characters
+              </div>
             </div>
-            <div *ngIf="userEmail.errors.maxlength">
-              Email must not be more than 50 characters
-            </div>
-          </div>
-        </mat-hint>
-      </mat-form-field>
+          </mat-hint>
+        </mat-form-field>
 
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label for="password">Password</mat-label>
-        <input
-          matInput
-          type="password"
-          name="password"
-          [(ngModel)]="form.password"
-          #password="ngModel"
-          required
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-          title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
-          minlength="6"
-          maxlength="100"
-        />
-        <mat-hint>
-          <div *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">
-              Password must be at least 6 characters
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label for="password">Password</mat-label>
+          <input matInput type="password" name="password" [(ngModel)]="form.password" #password="ngModel" required
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
+            minlength="6" maxlength="100" />
+          <mat-hint>
+            <div *ngIf="!f.submitted">
+              Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters
             </div>
-            <div *ngIf="password.errors.maxlength">
-              Password must not be more than 100 characters
+            <div *ngIf="f.submitted && password.invalid">
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">
+                Password must be at least 6 characters
+              </div>
+              <div *ngIf="password.errors.maxlength">
+                Password must not be more than 100 characters
+              </div>
+              <div *ngIf="password.errors.pattern">
+                Password must contain at least one number and one uppercase and
+                lowercase letter
+              </div>
             </div>
-            <div *ngIf="password.errors.pattern">
-              Password must contain at least one number and one uppercase and
-              lowercase letter
-            </div>
-          </div>
-        </mat-hint>
-      </mat-form-field>
-    </mat-card-content>
+          </mat-hint>
+        </mat-form-field>
+      </mat-card-content>
 
-    <mat-card-actions>
-      <button mat-raised-button color="accent">REGISTER</button>
-      <a
-        mat-raised-button
-        color="primary"
-        class="example-icon"
-        href="auth/login"
-        matTooltip="If You Already Have An Account"
-        >LOG IN</a
-      >
+      <mat-card-actions>
+        <button mat-raised-button color="accent">REGISTER</button>
+        <a mat-raised-button color="primary" class="example-icon" href="auth/login"
+          matTooltip="If You Already Have An Account">LOG IN</a>
 
-      <div *ngIf="f.submitted && isSignUpFailed">
-        Signup failed!<br />{{ errorMessage }}
-      </div>
-    </mat-card-actions>
-  </mat-card>
-</form>
+
+      </mat-card-actions>
+    </mat-card>
+  </form>
 </ng-template>
