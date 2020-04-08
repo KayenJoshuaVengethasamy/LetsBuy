@@ -111,7 +111,9 @@ import { UpdateProductComponent } from './admin/products/update-product/update-p
     HttpClientModule,
     MatTreeModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

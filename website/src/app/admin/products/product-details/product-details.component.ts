@@ -24,9 +24,26 @@ export class ProductDetailsComponent implements OnInit {
     }, error => console.log(error));
   }
 
-  list() {
+  listProduct() {
     this.r.navigate(['admin/product/list']);
   }
 
-  
+  updateProduct() {
+    console.log(this.productID)
+    this.r.navigate([`admin/product/update`, this.productID])
+  }
+
+  deleteProduct(productID: number) {
+
+    this.s.deleteProduct(productID).subscribe(
+      data => {
+        console.log(data);
+        this.listProduct();
+      },
+      error => console.log(error));
+
+
+  }
+
+
 }

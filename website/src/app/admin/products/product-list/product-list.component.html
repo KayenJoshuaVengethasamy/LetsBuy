@@ -30,7 +30,7 @@
     <mat-cell *matCellDef="let p"> {{p.productTag3}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="Details">
-    <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
     <mat-cell *matCellDef="let p"> <button mat-icon-button color="accent" (click)="productDetails(p.productID)"><mat-icon>arrow_right_alt</mat-icon></button> </mat-cell>
   </ng-container>
 

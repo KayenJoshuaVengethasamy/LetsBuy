@@ -27,20 +27,6 @@ export class ProductListComponent implements OnInit {
     location.reload(); 
   }
 
-  deleteProduct(productID: number) {
-    this.adminService.deleteProduct(productID).subscribe(
-      data => {
-        console.log(data);
-        this.reloadData();
-      },
-
-      error => {
-        console.log(error);
-        this.message = error;
-      }
-    );
-  }
-
   productDetails(productID: number) {
     this.r.navigate([`admin/product/details`,productID])
   }

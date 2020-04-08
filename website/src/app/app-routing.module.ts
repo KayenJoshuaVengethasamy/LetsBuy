@@ -59,7 +59,7 @@ const routes: Routes = [
       component: ProductListComponent
   },
   {
-      path: 'admin/product/update',
+      path: 'admin/product/update/:productID',
       component: UpdateProductComponent
   }
 ];

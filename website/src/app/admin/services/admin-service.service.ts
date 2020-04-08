@@ -43,7 +43,7 @@ export class AdminServiceService {
     return this.http.get(`${this.baseUrl}/products/getProductById/${id}`);
   }
   updateProduct(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/products/${id}`, value);
+    return this.http.put(`${this.baseUrl}/products/updateProduct/${id}`, value);
   }
 
   deleteProduct(id: number): Observable<any> {

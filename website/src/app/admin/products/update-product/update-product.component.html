@@ -1,1 +1,329 @@
-<p>update-product works!</p>
+
+<div *ngIf="isRegistered; else productForm">
+    Product Updated!!!
+  </div>
+  
+  <ng-template #productForm>
+  
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <button mat-raised-button color="accent" class="full-width-button">
+      UPDATE
+    </button>
+    <br />
+    <br />
+    <div *ngIf="f.submitted && isRegisteredFailed">
+      <mat-chip color="warn" selected>
+        {{ errorMessage }}
+      </mat-chip>
+    </div>
+    <br />
+    <br />
+    <div *ngIf="f.submitted">
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip *ngIf="productBrand.invalid" color="warn" selected>
+          <div *ngIf="productBrand.errors.required">
+            Please Choose A Brand
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productName.invalid" color="warn" selected>
+          <div *ngIf="productName.errors.required">
+            Product Name is required
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productImage.invalid" color="warn" selected>
+          <div *ngIf="productImage.errors.required">
+            A Product Image is required
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productPrice.invalid" color="warn" selected>
+          <div *ngIf="productPrice.errors.required">
+            Product Price is required
+          </div>
+          <div *ngIf="productPrice.errors.min">
+            Product Price cannot be less than 1 Rand
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productDescription.invalid" color="warn" selected>
+          <div *ngIf="productDescription.errors.required">
+            Product Description is required
+          </div>
+          <div *ngIf="productDescription.errors.maxlength">
+            Product Description is too long
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productQuantity.invalid" color="warn" selected>
+  
+          <div *ngIf="productQuantity.errors.required">
+            Product Quantity is required
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productTag1.invalid" color="warn" selected>
+          <div *ngIf="productTag1.errors.required">
+            Please Choose A Department
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productTag2.invalid" color="warn" selected>
+          <div *ngIf="productTag2.errors.required">
+            Please Choose A Second Department
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productTag3.invalid" color="warn" selected>
+          <div *ngIf="productTag3.errors.required">
+            Please Choose A Third Department
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="productTag4.invalid" color="warn" selected>
+          <div *ngIf="productTag4.errors.required">
+            Please Choose At Least One Tag
+          </div>
+        </mat-chip>
+        <mat-chip *ngIf="displayMessage" color="warn" selected>
+          <div>{{ message }}</div>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <mat-tab-group color="accent">
+      <mat-tab label="Product Brand">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label for="productBrand">Product Brand</mat-label>
+          <mat-select name="productBrand" [(value)]="selected" [(ngModel)]="p.productBrand" #productBrand="ngModel"
+            required>
+            <mat-optgroup *ngFor="let group of brandGroups" [label]="group.letter">
+              <mat-option *ngFor="let b of group.brands" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Product Name">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label for="productName">Product Name</mat-label>
+          <input matInput type="text" class="form-control" name="productName" [(ngModel)]="p.productName"
+            #productName="ngModel" required />
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Product Image">
+        <mat-label for="productImage">Product Image</mat-label>
+        <input type="file" class="form-control" name="productImage" [(ngModel)]="p.productImage"
+          #productImage="ngModel" required accept="image/gif, image/jpeg, image/png" />
+      </mat-tab>
+      <mat-tab label="Product Price">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label for="productPrice">Price</mat-label>
+          <input matInput type="number" class="form-control" name="productPrice" [(ngModel)]="p.productPrice"
+            #productPrice="ngModel" required min="1" />
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Product Description">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label for="productDescription">Description</mat-label>
+          <textarea matInput type="text" class="form-control" name="productDescription"
+            [(ngModel)]="p.productDescription" #productDescription="ngModel" required maxlength="100">
+          </textarea>
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Product Quantity">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label for="productQuantity">Quantity</mat-label>
+          <input matInput type="number" class="form-control" name="productQuantity" [(ngModel)]="p.productQuantity"
+            #productQuantity="ngModel" required />
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Department">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label for="productTag1">Department 1</mat-label>
+          <mat-select [(value)]="departmentA" name="productTag1" [(ngModel)]="p.productTag1" #productTag1="ngModel"
+            required>
+            <mat-option value="No Department 1">None</mat-option>
+            <mat-option *ngFor="let department of departments" [value]="department.area">
+              {{ department.area }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label for="productTag2">Department 2</mat-label>
+          <mat-select [(value)]="departmentB" name="productTag2" [(ngModel)]="p.productTag2" #productTag2="ngModel"
+            required>
+  
+            <mat-option value="No Department 2">None</mat-option>
+            <mat-option *ngFor="let department of departments" [value]="department.area">
+              {{ department.area }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label for="productTag3">Department 3</mat-label>
+          <mat-select [(value)]="departmentC" name="productTag3" [(ngModel)]="p.productTag3" #productTag3="ngModel"
+            required>
+  
+            <mat-option value="No Department 3">None</mat-option>
+            <mat-option *ngFor="let department of departments" [value]="department.area">
+              {{ department.area }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-tab>
+  
+      <mat-tab label="Tags">
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag4">Tag 1</mat-label>
+          <mat-select name="productTag4" [(value)]="productTagForm4" [(ngModel)]="p.productTag4" #productTag4="ngModel"
+            required>
+            <mat-option value="No Tag 1" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+  
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag5">Tag 2</mat-label>
+          <mat-select name="productTag5" [(value)]="productTagForm5" name="productTag5" [(ngModel)]="p.productTag5"
+            #productTag5="ngModel">
+            <mat-option value="No Tag 2" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+  
+  
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag6">Tag 3</mat-label>
+          <mat-select name="productTag6" [(value)]="productTagForm6" name="productTag6" [(ngModel)]="p.productTag6"
+            #productTag6="ngModel">
+            <mat-option value="No Tag 3" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+  
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag7">Tag 4</mat-label>
+          <mat-select name="productTag7" [(value)]="productTagForm7" name="productTag7" [(ngModel)]="p.productTag7"
+            #productTag7="ngModel">
+            <mat-option value="No Tag 4" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+  
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag8">Tag 5</mat-label>
+          <mat-select name="productTag8" [(value)]="productTagForm8" name="productTag8" [(ngModel)]="p.productTag8"
+            #productTag8="ngModel">
+            <mat-option value="No Tag 5" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+  
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag9">Tag 6</mat-label>
+          <mat-select name="productTag9" [(value)]="productTagForm9" name="productTag9" [(ngModel)]="p.productTag9"
+            #productTag9="ngModel">
+            <mat-option value="No Tag 6" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag10">Tag 7</mat-label>
+          <mat-select name="productTag10" [(value)]="productTagForm10" name="productTag10" [(ngModel)]="p.productTag10"
+            #productTag10="ngModel">
+            <mat-option value="No Tag 7" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag11">Tag 8</mat-label>
+          <mat-select name="productTag11" [(value)]="productTagForm11" name="productTag11" [(ngModel)]="p.productTag11"
+            #productTag11="ngModel">
+            <mat-option value="No Tag 8" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag12">Tag 9</mat-label>
+          <mat-select name="productTag12" [(value)]="productTagForm12" name="productTag12" [(ngModel)]="p.productTag12"
+            #productTag12="ngModel">
+            <mat-option value="No Tag 9" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag13">Tag 10</mat-label>
+          <mat-select name="productTag13" [(value)]="productTagForm13" name="productTag13" [(ngModel)]="p.productTag13"
+            #productTag13="ngModel">
+            <mat-option value="No Tag 10" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag14">Tag 11</mat-label>
+          <mat-select name="productTag14" [(value)]="productTagForm14" name="productTag14" [(ngModel)]="p.productTag14"
+            #productTag14="ngModel">
+            <mat-option value="No Tag 11" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="tag">
+          <mat-label for="productTag15">Tag 12</mat-label>
+          <mat-select name="productTag15" [(value)]="productTagForm15" name="productTag15" [(ngModel)]="p.productTag15"
+            #productTag15="ngModel">
+            <mat-option value="No Tag 12" selected>None</mat-option>
+            <mat-optgroup *ngFor="let group of departmentGroups" [label]="group.sector">
+              <mat-option *ngFor="let b of group.quadrant" [value]="b">{{
+                b
+              }}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <br />
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+  </ng-template>
+  

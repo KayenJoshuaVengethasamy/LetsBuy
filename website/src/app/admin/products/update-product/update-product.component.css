@@ -1,0 +1,18 @@
+.full-width {
+    width: 75%;  
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.full-width-button{
+    width: 100%;
+}
+.tag{
+    width:25%;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}

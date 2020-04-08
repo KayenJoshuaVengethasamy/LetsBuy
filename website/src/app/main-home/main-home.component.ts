@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TokenStorageService } from '../auth/token-storage.service';
+import { Product } from '../admin/products/product';
+import { Observable } from 'rxjs';
+import { AdminServiceService } from '../admin/services/admin-service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,8 +14,10 @@ import { TokenStorageService } from '../auth/token-storage.service';
 })
 export class MainHomeComponent implements OnInit {
   info: any;
+  p: Observable<Product[]>;
 
-  constructor(private token: TokenStorageService) { }
+
+  constructor(private token: TokenStorageService, private s: AdminServiceService, private r: Router) { }
 
   ngOnInit() {
     this.info = {
@@ -19,6 +25,11 @@ export class MainHomeComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    this.reloadData();
+  }
+
+  reloadData() {
+    this.p = this.s.getProductList();
   }
 
   logout() {
